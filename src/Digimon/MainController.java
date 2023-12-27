@@ -1,7 +1,5 @@
 package Digimon;
 
-import Digimon.DTO.CardDTO;
-import Digimon.DTO.MemberDTO;
 import Digimon.Service.CardService;
 import Digimon.Service.MemberService;
 
@@ -122,5 +120,4 @@ public class MainController {
         }
 
     }
-
 }
