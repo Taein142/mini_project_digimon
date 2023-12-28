@@ -7,7 +7,9 @@ import Digimon.Repository.CardRepository;
 import Digimon.Repository.DeckRepository;
 import Digimon.common.CommonVariables;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CardService {
@@ -192,15 +194,29 @@ public class CardService {
     }
 
     public void saveDeck() {
-        List<CardDTO> deckContents = null;
+        /*입력한 카드와 같은 카드를 cardDTO에서 끌어와서 그 정보들을 contents저장
+         * 추가로 같은 시리얼넘버를 가진 카드라면 매수를 추가한다.*/
         if (CommonVariables.loginEmail != null) {
             System.out.println("덱 이름을 입력해주세요");
             System.out.print("덱 이름: ");
             String deckName = scanner.next();
-            String cardName = scanner.next();
-//            List<CardDTO> deckContents = cardRepository.deckBuild();
-            /*입력한 카드와 같은 카드를 cardDTO에서 끌어와서 그 정보들을 contents저장
-            * 추가로 같은 시리얼넘버를 가진 카드라면 매수를 추가한다.*/
+            List<CardDTO> deckContents = new ArrayList<>();
+            String serialNum;
+            do {
+                System.out.print("시리얼 넘버: ");
+                serialNum = scanner.next();
+                if (!serialNum.equals("00")){
+                    CardDTO card = cardRepository.findBySerialNum(serialNum);
+                    if (card != null) {
+                        deckContents.add(card);
+                        System.out.println("카드 추가: " + card);
+                    }else {
+                        System.out.println("해당 카드가 존재하지 않습니다.");
+                    }
+                }
+            } while (!serialNum.equals("00"));
+
+
 
         } else {
             System.out.println("로그인해야 이용할 수 있는 서비스 입니다.");
