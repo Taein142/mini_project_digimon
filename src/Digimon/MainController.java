@@ -20,18 +20,18 @@ public class MainController {
         int selectNum4 = 0;
         while (run1) {
             System.out.println("메인메뉴");
-            System.out.println("-------------------------");
+            System.out.println("----------------------------------------------");
             System.out.println("1.멤버 | 2.카드 | 3.관리자 | 0.종료");
-            System.out.println("-------------------------");
+            System.out.println("----------------------------------------------");
             selectNum1 = scanner.nextInt();
             if (selectNum1 == 1) {
                 //멤버
                 run2 = true;
                 while (run2) {
                     System.out.println("회원메뉴");
-                    System.out.println("----------------------------------------------------------------------------");
-                    System.out.println("1.회원가입 | 2.로그인 | 3.회원목록 | 4.회원수정 | 5.회원탈퇴 | 6.로그아웃 | 0.종료");
-                    System.out.println("----------------------------------------------------------------------------");
+                    System.out.println("----------------------------------------------------------------------------------");
+                    System.out.println("1.회원가입 | 2.로그인 | 3.회원목록 | 4.회원수정 | 5.회원탈퇴 | 6.로그아웃 | 0.메인메뉴");
+                    System.out.println("----------------------------------------------------------------------------------");
                     selectNum2 = scanner.nextInt();
                     if (selectNum2 == 1) {
                         memberService.saveMember();
@@ -57,9 +57,9 @@ public class MainController {
                 run3 = true;
                 while (run3) {
                     System.out.println("카드메뉴");
-                    System.out.println("-------------------------------------------------------------------------");
-                    System.out.println("1.카드목록 | 2.카드조회 | 3.카드검색 | 4.덱구축 | 5.덱수정 | 6.덱삭제 | 0.종료");
-                    System.out.println("-------------------------------------------------------------------------");
+                    System.out.println("------------------------------------------------------------------------------");
+                    System.out.println("1.카드목록 | 2.카드조회 | 3.카드검색 | 4.덱구축 | 5.덱수정 | 6.덱삭제 | 0.메인메뉴");
+                    System.out.println("------------------------------------------------------------------------------");
                     selectNum3 = scanner.nextInt();
                     if (selectNum3 == 1) {
 //                        cardService.findAll();
@@ -85,23 +85,26 @@ public class MainController {
                 run4 = true;
                 while (run4) {
                     System.out.println("관리자메뉴");
-                    System.out.println("-------------------------------------------------------------------------");
-                    System.out.println("1.관리자등록 | 2.관리자삭제 | 3.카드등록 | 4. 카드수정 | 5. 카드삭제 | 0.종료");
-                    System.out.println("-------------------------------------------------------------------------");
+                    System.out.println("----------------------------------------------------------------------------------------");
+                    System.out.println("1.관리자등록 | 2.관리자삭제 | 3.관리자목록 | 4.카드등록 | 5.카드수정 | 6.카드삭제 | 0.메인메뉴");
+                    System.out.println("----------------------------------------------------------------------------------------");
                     selectNum4 = scanner.nextInt();
                     if (selectNum4 == 1) {
                         System.out.println("관리자등록");
-//                        memberService.saveAdmin();
+                        memberService.saveAdmin();
                     } else if (selectNum4 == 2) {
                         System.out.println("관리자삭제");
-//                        memberService.deleteAdmin();
+                        memberService.deleteAdmin();
                     } else if (selectNum4 == 3) {
-                        System.out.println("카드등록");
-//                        cardService.saveCard();
+                        System.out.println("관리자목록");
+                        memberService.findAdmin();
                     } else if (selectNum4 == 4) {
+                        System.out.println("카드등록");
+                        cardService.saveCard();
+                    } else if (selectNum4 == 5) {
                         System.out.println("카드수정");
 //                        cardService.updateCard();
-                    } else if (selectNum4 == 5) {
+                    } else if (selectNum4 == 6) {
                         System.out.println("카드삭제");
 //                        cardService.deleteCard();
                     } else if (selectNum4 == 0) {

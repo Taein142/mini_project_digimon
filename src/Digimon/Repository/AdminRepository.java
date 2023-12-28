@@ -12,4 +12,18 @@ public class AdminRepository {
     public boolean saveAdmin(AdminDTO adminDTO) {
         return adminDTOList.add(adminDTO);
     }
+
+    public List<AdminDTO> findAdmin() {
+        return adminDTOList;
+    }
+
+    public boolean deleteAdmin(Long id) {
+        boolean result = false;
+        for (AdminDTO adminDTO : adminDTOList) {
+            if (id.equals(adminDTO.getId())) {
+                adminDTOList.remove(adminDTO);
+            }
+        }
+        return result;
+    }
 }
