@@ -193,12 +193,15 @@ public class CardService {
     }
 
     public void saveDeck() {
+        List<CardDTO> deckContents = null;
         if (CommonVariables.loginEmail != null) {
             System.out.println("덱 이름을 입력해주세요");
             System.out.print("덱 이름: ");
             String deckName = scanner.next();
             String cardName = scanner.next();
 //            List<CardDTO> deckContents = cardRepository.deckBuild();
+            /*입력한 카드와 같은 카드를 cardDTO에서 끌어와서 그 정보들을 contents저장
+            * 추가로 같은 시리얼넘버를 가진 카드라면 매수를 추가한다.*/
 
         } else {
             System.out.println("로그인해야 이용할 수 있는 서비스 입니다.");

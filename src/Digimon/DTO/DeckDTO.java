@@ -9,7 +9,7 @@ public class DeckDTO {
     private String deckTitle;
     private List<CardDTO> deckContents;
     private long hits;
-    private int count;
+//    private int count;
     private String createdAt;
 
     public Long getId() {
@@ -44,13 +44,13 @@ public class DeckDTO {
         this.hits = hits;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
+//    public int getCount() {
+//        return count;
+//    }
+//
+//    public void setCount(int count) {
+//        this.count = count;
+//    }
 
     public String getCreatedAt() {
         return createdAt;
@@ -69,7 +69,7 @@ public class DeckDTO {
         this.deckContents = deckContents;
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm:ss"));
         this.hits = 0;
-        this.count = 0;
+//        this.count = 1;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class DeckDTO {
                 ", deckTitle='" + deckTitle + '\'' +
                 ", deckContents='" + deckContents + '\'' +
                 ", hits=" + hits +
-                ", count=" + count +
+//                ", count=" + count +
                 ", createdAt='" + createdAt + '\'' +
                 '}';
     }

@@ -86,10 +86,19 @@ public class CardDTO {
         this.createdAt = createdAt;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public CardDTO() {
     }
 
     private static Long inValue = 1L;
+    private int count;
 
     public CardDTO(String cardName, String category, int level, int power, String cardEffects, String boosterNum, String serialNum) {
         this.id = inValue++;
@@ -100,9 +109,11 @@ public class CardDTO {
         this.cardEffects = cardEffects;
         this.boosterNum = boosterNum;
         this.serialNum = serialNum;
+        this.count = 0;
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm:ss"));
     }
 
+    @Override
     public String toString() {
         return "CardDTO{" +
                 "id=" + id +
@@ -114,6 +125,7 @@ public class CardDTO {
                 ", boosterNum='" + boosterNum + '\'' +
                 ", serialNum='" + serialNum + '\'' +
                 ", createdAt='" + createdAt + '\'' +
+                ", count=" + count +
                 '}';
     }
 }
