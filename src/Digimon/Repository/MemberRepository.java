@@ -26,6 +26,16 @@ public class MemberRepository {
         return null;
     }
 
+    public boolean checkId(Long id) {
+        boolean result = false;
+        for (int i = 0; i < memberDTOList.size(); i++) {
+            if (id.equals(memberDTOList.get(i).getId())) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
     public MemberDTO login(String memberEmail, String memberPass) {
         for (MemberDTO memberDTO : memberDTOList) {
             if (memberEmail.equals(memberDTO.getMemberEmail()) && memberPass.equals(memberDTO.getMemberPass())) {
@@ -65,4 +75,6 @@ public class MemberRepository {
         }
         return result;
     }
+
+
 }

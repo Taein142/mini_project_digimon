@@ -130,39 +130,64 @@ public class MemberService {
     }
 
     public void saveAdmin() {
-//        if (CommonVariables.loginEmail.equals(adminDTO.getAdminEmail())) {
-        System.out.println("등록할 사람의 아이디와 이메일을 입력해주세요");
-        System.out.print("아이디: ");
-        Long id = scanner.nextLong();
-        System.out.print("이메일: ");
-        String adminEmail = scanner.next();
-        AdminDTO adminDTO = new AdminDTO(id, adminEmail);
-        boolean adminResult = adminRepository.saveAdmin(adminDTO);
-        if (adminResult) {
-            System.out.println("관리자로 임명되었습니다.");
-        } else {
-            System.out.println("거부되었습니다.");
+        List<AdminDTO> adminDTOList = adminRepository.findAdmin();
+        for (int i = 0; i < adminDTOList.size(); i++) {
+            if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
+                System.out.println("등록할 사람의 아이디와 이메일을 입력해주세요");
+                System.out.print("아이디: ");
+                Long id = scanner.nextLong();
+                System.out.print("이메일: ");
+                String adminEmail = scanner.next();
+                boolean checkId = memberRepository.checkId(id);
+                MemberDTO checkEmail = memberRepository.checkEmail(adminEmail);
+                if (checkId && checkEmail != null) {
+                    AdminDTO adminDTO = new AdminDTO(id, adminEmail);
+                    boolean adminResult = adminRepository.saveAdmin(adminDTO);
+                    if (adminResult) {
+                        System.out.println("관리자로 임명되었습니다.");
+                    } else {
+                        System.out.println("거부되었습니다.");
+                    }
+                } else {
+                    System.out.println("잘못된 id 혹은 이메일입니다.");
+                }
+                break;
+            } else {
+                System.out.println("관리자만 이용할 수 있는 서비스입니다.");
+            }
         }
-//        } else {
-//            System.out.println("관리자만 이용할 수 있는 서비스입니다.");
-//        }
     }
 
     public void deleteAdmin() {
-        System.out.println("삭제할 관리자 id: ");
-        Long id = scanner.nextLong();
-        boolean result = adminRepository.deleteAdmin(id);
-        if (result) {
-            System.out.println("해당 관리자가 퇴출되었습니다.");
-        } else {
-            System.out.println("관리자 삭제에 실패하였습니다.");
+        List<AdminDTO> adminDTOList = adminRepository.findAdmin();
+        for (int i = 0; i < adminDTOList.size(); i++) {
+            if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
+                System.out.println("삭제할 관리자 id: ");
+                Long id = scanner.nextLong();
+                boolean result = adminRepository.deleteAdmin(id);
+                if (result) {
+                    System.out.println("해당 관리자가 퇴출되었습니다.");
+                } else {
+                    System.out.println("관리자 삭제에 실패하였습니다.");
+                }
+                break;
+            } else {
+                System.out.println("관리자만 이용할 수 있는 서비스입니다.");
+            }
         }
     }
 
     public void findAdmin() {
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
-        for (AdminDTO adminDTO : adminDTOList) {
-            System.out.println("adminDTO = " + adminDTO);
+        for (int i = 0; i < adminDTOList.size(); i++) {
+            if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
+                for (AdminDTO adminDTO : adminDTOList) {
+                    System.out.println("adminDTO = " + adminDTO);
+                }
+                break;
+            } else {
+                System.out.println("관리자만 이용할 수 있는 서비스입니다.");
+            }
         }
     }
 }
