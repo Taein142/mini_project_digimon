@@ -4,8 +4,6 @@ import Digimon.DTO.MemberDTO;
 import Digimon.Repository.AdminRepository;
 import Digimon.Repository.MemberRepository;
 import Digimon.common.CommonVariables;
-
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Scanner;
 
