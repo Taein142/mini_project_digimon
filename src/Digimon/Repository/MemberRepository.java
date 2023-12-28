@@ -57,9 +57,9 @@ public class MemberRepository {
 
     public boolean deleteMember(String memberEmail, String memberPass) {
         boolean result = false;
-        for (MemberDTO memberDTO : memberDTOList) {
-            if (memberEmail.equals(memberDTO.getMemberEmail()) && memberPass.equals(memberDTO.getMemberPass())) {
-                memberDTOList.remove(memberDTO);
+        for (int i = 0; i < memberDTOList.size(); i++) {
+            if (memberEmail.equals(memberDTOList.get(i).getMemberEmail()) && memberPass.equals(memberDTOList.get(i).getMemberPass())) {
+                memberDTOList.remove(i);
                 result = true;
             }
         }
