@@ -42,9 +42,9 @@ public class MainController {
                     } else if (selectNum2 == 4) {
                         memberService.updateMember();
                     } else if (selectNum2 == 5) {
-//                        memberService.deleteMember();
+                        memberService.deleteMember();
                     } else if (selectNum2 == 6) {
-//                        memberService.logout();
+                        memberService.logout();
                     } else if (selectNum2 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
                         run2 = false;

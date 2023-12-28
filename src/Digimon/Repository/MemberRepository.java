@@ -54,4 +54,15 @@ public class MemberRepository {
         }
         return result;
     }
+
+    public boolean deleteMember(String memberEmail, String memberPass) {
+        boolean result = false;
+        for (MemberDTO memberDTO : memberDTOList) {
+            if (memberEmail.equals(memberDTO.getMemberEmail()) && memberPass.equals(memberDTO.getMemberPass())) {
+                memberDTOList.remove(memberDTO);
+                result = true;
+            }
+        }
+        return result;
+    }
 }
