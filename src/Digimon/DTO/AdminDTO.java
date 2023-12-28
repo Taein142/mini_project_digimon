@@ -44,7 +44,7 @@ public class AdminDTO {
     public AdminDTO() {
     }
 
-    private static Long inValue = 1L;
+    private static Long inValue = 0L;
 
     public AdminDTO(Long memberId, String adminEmail) {
         this.id = inValue++;

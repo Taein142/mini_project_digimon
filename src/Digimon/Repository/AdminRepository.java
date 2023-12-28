@@ -19,9 +19,10 @@ public class AdminRepository {
 
     public boolean deleteAdmin(Long id) {
         boolean result = false;
-        for (AdminDTO adminDTO : adminDTOList) {
-            if (id.equals(adminDTO.getId())) {
-                adminDTOList.remove(adminDTO);
+        for (int i = 0; i < adminDTOList.size(); i++) {
+            if (id.equals(adminDTOList.get(i).getId())) {
+                adminDTOList.remove(i);
+                result = true;
             }
         }
         return result;
