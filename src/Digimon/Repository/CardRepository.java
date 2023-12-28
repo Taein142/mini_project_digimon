@@ -29,7 +29,7 @@ public class CardRepository {
     public List<CardDTO> searchBooster(String word) {
         List<CardDTO> bossterList = new ArrayList<>();
         for (CardDTO cardDTO : cardDTOList) {
-            if (cardDTO.getCardName().contains(word)) {
+            if (cardDTO.getBoosterNum().contains(word)) {
                 bossterList.add(cardDTO);
             }
         }
@@ -43,5 +43,41 @@ public class CardRepository {
             }
         }
         return null;
+    }
+
+    public CardDTO check(Long id) {
+        for (CardDTO cardDTO : cardDTOList) {
+            if (id.equals(cardDTO.getId())) {
+                return cardDTO;
+            }
+        }
+        return null;
+    }
+
+    public CardDTO updateCard(Long id, String cardName, String category, int level, int power, String effect, String booster, String serialNum) {
+        for (int i = 0; i < cardDTOList.size(); i++) {
+            if (id.equals(cardDTOList.get(i).getId())) {
+                cardDTOList.get(i).setCardName(cardName);
+                cardDTOList.get(i).setCategory(category);
+                cardDTOList.get(i).setLevel(level);
+                cardDTOList.get(i).setPower(power);
+                cardDTOList.get(i).setCardEffects(effect);
+                cardDTOList.get(i).setBoosterNum(booster);
+                cardDTOList.get(i).setSerialNum(serialNum);
+                return cardDTOList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteCard(Long id) {
+        boolean result = false;
+        for (int i = 0; i < cardDTOList.size(); i++) {
+            if (id.equals(cardDTOList.get(i).getId())) {
+                cardDTOList.remove(i);
+                result = true;
+            }
+        }
+        return result;
     }
 }

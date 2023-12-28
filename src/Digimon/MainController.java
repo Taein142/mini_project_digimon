@@ -101,10 +101,10 @@ public class MainController {
                         cardService.saveCard();
                     } else if (selectNum4 == 5) {
                         System.out.println("카드수정");
-//                        cardService.updateCard();
+                        cardService.updateCard();
                     } else if (selectNum4 == 6) {
                         System.out.println("카드삭제");
-//                        cardService.deleteCard();
+                        cardService.deleteCard();
                     } else if (selectNum4 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
                         run4 = false;
@@ -116,7 +116,7 @@ public class MainController {
                 System.out.println("시스템을 종료합니다.");
                 run1 = false;
             } else {
-                System.out.println("메뉴상의 숫자를 입려해 주세요");
+                System.out.println("메뉴상의 숫자를 입력해 주세요");
             }
         }
 
