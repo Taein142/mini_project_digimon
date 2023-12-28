@@ -4,6 +4,7 @@ import Digimon.DTO.MemberDTO;
 import Digimon.Repository.AdminRepository;
 import Digimon.Repository.MemberRepository;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MemberService {
@@ -35,7 +36,7 @@ public class MemberService {
         if (result) {
             System.out.println("가입 완료되었습니다.");
         } else {
-            System.out.println("예상치 못한 오류로 인하여 작업이 중지되었습니다")
+            System.out.println("예상치 못한 오류로 인하여 작업이 중지되었습니다");
             System.out.println("다시 시도해주세요.");
         }
     }
@@ -46,10 +47,17 @@ public class MemberService {
         System.out.print("비밀번호: ");
         String memberPass = scanner.next();
         MemberDTO loginResult = memberRepository.login(memberEmail, memberPass);
-        if (loginResult != null){
+        if (loginResult != null) {
             System.out.println("로그인되었습니다.");
-        }else {
+        } else {
             System.out.println("이메일 혹은 비밀번호가 틀렸습니다.");
+        }
+    }
+
+    public void findAll() {
+        List<MemberDTO> memberDTOList = memberRepository.findAll();
+        for (MemberDTO memberDTO : memberDTOList) {
+            System.out.println("memberDTO = " + memberDTO);
         }
     }
 }

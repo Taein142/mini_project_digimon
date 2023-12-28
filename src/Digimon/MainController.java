@@ -40,11 +40,11 @@ public class MainController {
                     } else if (selectNum2 == 3) {
                         memberService.findAll();
                     } else if (selectNum2 == 4) {
-                        memberService.updateMember();
+//                        memberService.updateMember();
                     } else if (selectNum2 == 5) {
-                        memberService.deleteMember();
+//                        memberService.deleteMember();
                     } else if (selectNum2 == 6) {
-                        memberService.logout();
+//                        memberService.logout();
                     } else if (selectNum2 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
                         run2 = false;
@@ -62,17 +62,17 @@ public class MainController {
                     System.out.println("-------------------------------------------------------------------------");
                     selectNum3 = scanner.nextInt();
                     if (selectNum3 == 1) {
-                        cardService.findAll();
+//                        cardService.findAll();
                     } else if (selectNum3 == 2) {
-                        cardService.findById();
+//                        cardService.findById();
                     } else if (selectNum3 == 3) {
-                        cardService.search();
+//                        cardService.search();
                     } else if (selectNum3 == 4) {
-                        cardService,saveDeck();
+//                        cardService,saveDeck();
                     } else if (selectNum3 == 5) {
-                        cardService.updateDeck();
+//                        cardService.updateDeck();
                     } else if (selectNum3 == 6) {
-                        cardService.deleteDeck();
+//                        cardService.deleteDeck();
                     } else if (selectNum3 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
                         run3 = false;
@@ -91,19 +91,19 @@ public class MainController {
                     selectNum4 = scanner.nextInt();
                     if (selectNum4 == 1) {
                         System.out.println("관리자등록");
-                        memberService.saveAdmin();
+//                        memberService.saveAdmin();
                     } else if (selectNum4 == 2) {
                         System.out.println("관리자삭제");
-                        memberService.deleteAdmin();
+//                        memberService.deleteAdmin();
                     } else if (selectNum4 == 3) {
                         System.out.println("카드등록");
-                        cardService.saveCard();
+//                        cardService.saveCard();
                     } else if (selectNum4 == 4) {
                         System.out.println("카드수정");
-                        cardService.updateCard();
+//                        cardService.updateCard();
                     } else if (selectNum4 == 5) {
                         System.out.println("카드삭제");
-                        cardService.deleteCard();
+//                        cardService.deleteCard();
                     } else if (selectNum4 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
                         run4 = false;
