@@ -2,11 +2,12 @@ package Digimon.DTO;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class DeckDTO {
     private Long id;
     private String deckTitle;
-    private String deckContents;
+    private List<CardDTO> deckContents;
     private long hits;
     private int count;
     private String createdAt;
@@ -27,11 +28,11 @@ public class DeckDTO {
         this.deckTitle = deckTitle;
     }
 
-    public String getDeckContents() {
+    public List<CardDTO> getDeckContents() {
         return deckContents;
     }
 
-    public void setDeckContents(String deckContents) {
+    public void setDeckContents(List<CardDTO> deckContents) {
         this.deckContents = deckContents;
     }
 
@@ -62,7 +63,7 @@ public class DeckDTO {
     public DeckDTO() {
     }
     private static Long inValue = 1L;
-    public DeckDTO(String deckTitle, String deckContents) {
+    public DeckDTO(String deckTitle, List<CardDTO> deckContents) {
         this.id = inValue++;
         this.deckTitle = deckTitle;
         this.deckContents = deckContents;

@@ -4,6 +4,7 @@ import Digimon.DTO.CardDTO;
 import Digimon.Repository.AdminRepository;
 import Digimon.Repository.CardRepository;
 import Digimon.Repository.DeckRepository;
+import Digimon.common.CommonVariables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,6 +164,19 @@ public class CardService {
             }
         } else {
             System.out.println("id를 다시 확인해주세요");
+        }
+    }
+
+    public void saveDeck() {
+        if (CommonVariables.loginEmail != null) {
+            System.out.println("덱 이름을 입력해주세요");
+            System.out.print("덱 이름: ");
+            String deckName = scanner.next();
+            String cardName = scanner.next();
+//            List<CardDTO> deckContents = cardRepository.deckBuild();
+
+        } else {
+            System.out.println("로그인해야 이용할 수 있는 서비스 입니다.");
         }
     }
 }
