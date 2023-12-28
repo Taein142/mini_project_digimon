@@ -2,6 +2,7 @@ package Digimon;
 
 import Digimon.Service.CardService;
 import Digimon.Service.MemberService;
+import Digimon.common.CommonVariables;
 
 import java.util.Scanner;
 
@@ -66,7 +67,7 @@ public class MainController {
                     } else if (selectNum3 == 2) {
                         cardService.search();
                     } else if (selectNum3 == 3) {
-//                        cardService,saveDeck();
+                        cardService.saveDeck();
                     } else if (selectNum3 == 4) {
 //                        cardService.updateDeck();
                     } else if (selectNum3 == 5) {
@@ -119,6 +120,5 @@ public class MainController {
                 System.out.println("메뉴상의 숫자를 입력해 주세요");
             }
         }
-
     }
 }
