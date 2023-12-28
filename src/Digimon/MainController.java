@@ -40,7 +40,7 @@ public class MainController {
                     } else if (selectNum2 == 3) {
                         memberService.findAll();
                     } else if (selectNum2 == 4) {
-//                        memberService.updateMember();
+                        memberService.updateMember();
                     } else if (selectNum2 == 5) {
 //                        memberService.deleteMember();
                     } else if (selectNum2 == 6) {
