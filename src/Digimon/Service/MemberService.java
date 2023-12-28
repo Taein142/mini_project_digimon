@@ -1,7 +1,6 @@
 package Digimon.Service;
 
 import Digimon.DTO.MemberDTO;
-import Digimon.Repository.AdminRepository;
 import Digimon.Repository.MemberRepository;
 import Digimon.common.CommonVariables;
 import java.util.List;
@@ -32,6 +31,9 @@ public class MemberService {
         System.out.print("전화번호: ");
         String memberMobile = scanner.next();
         MemberDTO dto = new MemberDTO(memberEmail, memberPass, memberName, memberMobile);
+        if (memberDTO.getId() == 0L){
+
+        }
         boolean result = memberRepository.save(dto);
         if (result) {
             System.out.println("가입 완료되었습니다.");
@@ -82,6 +84,7 @@ public class MemberService {
         } else {
             System.out.println("비밀번호가 틀렸습니다.");
         }
-
     }
+
+
 }

@@ -1,7 +1,5 @@
 package Digimon.common;
 
-import Digimon.DTO.AdminDTO;
-
 import java.util.List;
 
 public class CommonVariables {
