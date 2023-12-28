@@ -7,7 +7,6 @@ import Digimon.Repository.CardRepository;
 import Digimon.Repository.DeckRepository;
 import Digimon.common.CommonVariables;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

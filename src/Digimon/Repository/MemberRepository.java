@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberRepository {
-    private static List<MemberDTO> memberDTOList = new ArrayList<>();
+    public static List<MemberDTO> memberDTOList = new ArrayList<>();
 
     public MemberDTO checkEmail(String memberEmail) {
         for (MemberDTO memberDTO : memberDTOList) {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardRepository {
-    private static List<CardDTO> cardDTOList = new ArrayList<>();
+    public static List<CardDTO> cardDTOList = new ArrayList<>();
 
     public boolean saveCard(CardDTO cardDTO) {
         return cardDTOList.add(cardDTO);
@@ -75,6 +75,19 @@ public class CardRepository {
         for (int i = 0; i < cardDTOList.size(); i++) {
             if (id.equals(cardDTOList.get(i).getId())) {
                 cardDTOList.remove(i);
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public boolean updateCount(String serialNumber) {
+        boolean result = false;
+        for (CardDTO cardDTO : cardDTOList) {
+            if (serialNumber.equals(cardDTO.getSerialNum())) {
+                int count = cardDTO.getCount();
+                count += 1;
+                cardDTO.setCount(count);
                 result = true;
             }
         }
