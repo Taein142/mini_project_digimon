@@ -86,8 +86,12 @@ public class CardRepository {
         for (CardDTO cardDTO : cardDTOList) {
             if (serialNumber.equals(cardDTO.getSerialNum())) {
                 int count = cardDTO.getCount();
-                count += 1;
-                cardDTO.setCount(count);
+                if (count<4){
+                    count += 1;
+                    cardDTO.setCount(count);
+                }else {
+                    System.out.println("4장까지 넣을 수 있습니다.");
+                }
                 result = true;
             }
         }
