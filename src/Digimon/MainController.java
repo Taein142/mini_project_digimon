@@ -111,11 +111,11 @@ public class MainController {
                         System.out.println("관리자등록");
                         memberService.saveAdmin();
                     } else if (selectNum4 == 2) {
-                        System.out.println("관리자삭제");
-                        memberService.deleteAdmin();
-                    } else if (selectNum4 == 3) {
                         System.out.println("관리자목록");
                         memberService.findAdmin();
+                    } else if (selectNum4 == 3) {
+                        System.out.println("관리자삭제");
+                        memberService.deleteAdmin();
                     } else if (selectNum4 == 4) {
                         System.out.println("카드등록");
                         cardService.saveCard();
