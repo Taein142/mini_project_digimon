@@ -17,15 +17,6 @@ public class MemberRepository {
         return null;
     }
 
-    public MemberDTO checkPass(String memberPass) {
-        for (MemberDTO memberDTO : memberDTOList) {
-            if (memberPass.equals(memberDTO.getMemberPass())) {
-                return memberDTO;
-            }
-        }
-        return null;
-    }
-
     public boolean checkId(Long id) {
         boolean result = false;
         for (int i = 0; i < memberDTOList.size(); i++) {

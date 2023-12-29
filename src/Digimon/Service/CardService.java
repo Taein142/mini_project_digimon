@@ -252,6 +252,7 @@ public class CardService {
         if (hitsResult) {
             DeckDTO deckDTO = deckRepository.finDeckId(id);
             listPrint4(deckDTO);
+            listPrint5(deckDTO.getCardContents());
         } else {
             System.out.println("존재하지 않는 덱입니다..");
         }
@@ -375,7 +376,15 @@ public class CardService {
     private void listPrint4(DeckDTO deckDTO) {
         System.out.println("id\t" + "작성자\t" + "덱이름\t" + "조회수\t" + "생성시간");
         System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\t" + deckDTO.getHits() + "\t" + deckDTO.getCreatedAt());
-        System.out.println("덱구성");
-        System.out.println(deckDTO.getCardContents());
+        System.out.println(" ");
+        System.out.println("덱구성: ");
+    }
+
+    private void listPrint5(List<CardDTO> cardContents) {
+        System.out.println("카드이름\t" + "카테고리\t" + "레벨\t" + "파워\t" + "카드매수\t" + "메인 효과\t" + "진화원 효과\t" + "시리얼넘버\t");
+        for (CardDTO cardDTO : cardContents) {
+            System.out.println(cardDTO.getCardName() + "\t" + cardDTO.getCategory() + "\t" + cardDTO.getLevel() + "\t"
+                    + cardDTO.getPower() + "\t" + cardDTO.getCount() + "\t" + cardDTO.getCardMainEffects() + "\t" + cardDTO.getCardSideEffects() + "\t" + cardDTO.getSerialNum());
+        }
     }
 }
