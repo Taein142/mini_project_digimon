@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DeckDTO {
+public class DeckDTO { ;
     private Long id;
     private String deckTitle;
     private List<CardDTO> cardContents;
     private long hits;
+    private String createdEmail;
     private String createdAt;
 
 
@@ -53,15 +54,24 @@ public class DeckDTO {
         this.createdAt = createdAt;
     }
 
+    public String getCreatedEmail() {
+        return createdEmail;
+    }
+
+    public void setCreatedEmail(String createdEmail) {
+        this.createdEmail = createdEmail;
+    }
+
     public DeckDTO() {
     }
     public DeckDTO(List<CardDTO> cardContents) {
     }
     private static Long inValue = 1L;
-    public DeckDTO(String deckTitle, List<CardDTO> cardContents) {
+    public DeckDTO(String deckTitle, List<CardDTO> cardContents, String createdEmail) {
         this.id = inValue++;
         this.deckTitle = deckTitle;
         this.cardContents = cardContents;
+        this.createdEmail = createdEmail;
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm:ss"));
         this.hits = 0;
     }
@@ -71,9 +81,9 @@ public class DeckDTO {
         return "DeckDTO{" +
                 "id=" + id +
                 ", deckTitle='" + deckTitle + '\'' +
-                ", deckContents='" + cardContents + '\'' +
+                ", cardContents=" + cardContents +
                 ", hits=" + hits +
-//                ", count=" + count +
+                ", createdEmail='" + createdEmail + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 '}';
     }

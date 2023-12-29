@@ -3,6 +3,7 @@ package Digimon.Service;
 import Digimon.DTO.AdminDTO;
 import Digimon.DTO.CardDTO;
 import Digimon.DTO.DeckDTO;
+import Digimon.DTO.MemberDTO;
 import Digimon.Repository.AdminRepository;
 import Digimon.Repository.CardRepository;
 import Digimon.Repository.DeckRepository;
@@ -113,14 +114,6 @@ public class CardService {
         System.out.println("cardDTO = " + cardDTO);
     }
 
-    private void listPrint(List<CardDTO> cardDTOList) {
-        System.out.println("cardName\t" + "category\t" + "level\t" + "power\t" + "cardEffect\t" + "serialNum\t");
-        for (CardDTO cardDTO : cardDTOList) {
-            System.out.println(cardDTO.getCardName() + "\t" + cardDTO.getCategory() + "\t" + cardDTO.getLevel() + "\t"
-                    + cardDTO.getPower() + "\t" + cardDTO.getCardEffects() + "\t" + cardDTO.getSerialNum() + "\t");
-        }
-    }
-
     public void updateCard() {
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
         for (int i = 0; i < adminDTOList.size(); i++) {
@@ -229,7 +222,7 @@ public class CardService {
                 }
             } while (!serialNum.equals("00"));
             listPrint2(cardContents);
-            DeckDTO deckDTO = new DeckDTO(deckName, cardContents);
+            DeckDTO deckDTO = new DeckDTO(deckName, cardContents, CommonVariables.loginEmail);
             boolean deckResult = deckRepository.saveDeck(deckDTO);
 
             if (deckResult) {
@@ -239,28 +232,6 @@ public class CardService {
             }
         } else {
             System.out.println("로그인해야 이용할 수 있는 서비스 입니다.");
-        }
-    }
-
-    private void listPrint2(List<CardDTO> cardDTOList) {
-        System.out.println("cardName\t" + "category\t" + "level\t" + "power\t" + "count\t" + "cardEffect\t" + "serialNum\t");
-        for (CardDTO cardDTO : cardDTOList) {
-            System.out.println(cardDTO.getCardName() + "\t" + cardDTO.getCategory() + "\t" + cardDTO.getLevel() + "\t"
-                    + cardDTO.getPower() + "\t" + cardDTO.getCount() + "\t" + cardDTO.getCardEffects() + "\t" + cardDTO.getSerialNum());
-        }
-    }
-
-    private void listPrint3(List<DeckDTO> deckDTOList) {
-        System.out.println("id\t" + "deckTitle\t" + "hits\t");
-        for (DeckDTO deckDTO : deckDTOList) {
-            System.out.println(deckDTO.getId() + "\t" + deckDTO.getDeckTitle() + "\t" + deckDTO.getHits());
-        }
-    }
-
-    private void listPrint4(List<DeckDTO> deckDTOList) {
-        System.out.println("deckTitle\t" + "cardContents\t" + "hits\t");
-        for (DeckDTO deckDTO : deckDTOList) {
-            System.out.println(deckDTO.getDeckTitle() + "\n" + deckDTO.getCardContents() + "\n" + deckDTO.getHits());
         }
     }
 
@@ -275,7 +246,7 @@ public class CardService {
         boolean hitsResult = deckRepository.updateHits(id);
         if (hitsResult) {
             DeckDTO deckDTO = deckRepository.finDeckId(id);
-            System.out.println("deckDTO = " + deckDTO);
+            listPrint4(deckDTO);
         } else {
             System.out.println("존재하지 않는 덱입니다..");
         }
@@ -288,8 +259,114 @@ public class CardService {
         if (searchTitleList.size() > 0) {
             System.out.println("검색 결과");
             listPrint3(searchTitleList);
+            System.out.println("상세검색 하시겠습니까?");
+            System.out.println("1.상세검색 | 2.뒤로");
+            int selectNum = scanner.nextInt();
+            if (selectNum == 1) {
+                findDeckId();
+            }
         } else {
             System.out.println("검색결과가 없습니다.");
         }
+    }
+
+    public void updateDeck() {
+        System.out.println("수정하실 덱의 ID를 입력해주세요");
+        Long id = scanner.nextLong();
+        DeckDTO deckDTO = deckRepository.checkEmail(CommonVariables.loginEmail,id);
+        if (deckDTO != null) {
+            // 로그인유저의 이메일과 이 덱을 만든 이메일이 같다면
+            System.out.println("수정할 정보를 입력해주세요");
+            System.out.print("덱 이름");
+            String deckTitle = scanner.next();
+            System.out.println("덱 구성도 다시 만드시겠습니까?");
+            System.out.println("1.네 | 2.아니오");
+            List<CardDTO> cardContents = new ArrayList<>();
+            DeckDTO updateResult = null;
+            int selectNum = scanner.nextInt();
+            if (selectNum == 1) {
+                String serialNum;
+                do {
+                    System.out.print("시리얼 넘버: ");
+                    serialNum = scanner.next();
+                    if (!serialNum.equals("00")) {
+                        boolean checkCount = cardRepository.cardCount(cardContents, serialNum);
+                        CardDTO card = cardRepository.findBySerialNum(serialNum);
+                        if (card != null) {
+                            if (checkCount) {
+                                // 덱에 동일한 시리얼넘버를 가진 카드가 있다면 카운트를 늘린다
+                                boolean countResult = cardRepository.updateCount(serialNum);
+                                if (countResult) {
+                                    System.out.println(card.getCardName() + "의 매수 +1");
+                                } else {
+                                    System.out.println("오류발생. 카드 매수 추가 실패");
+                                }
+                            } else {
+                                // 없다면 덱에 추가한다.
+                                cardContents.add(card);
+                                System.out.println("카드 추가: " + card.getCardName());
+                            }
+                        } else {
+                            System.out.println("해당 카드가 존재하지 않습니다.");
+                        }
+                    }
+                } while (!serialNum.equals("00"));
+                updateResult = deckRepository.updateDeckAll(id, deckTitle, cardContents);
+            } else {
+                updateResult = deckRepository.updateDeckTitle(id, deckTitle);
+                System.out.println("이전 메뉴로 돌아갑니다.");
+            }
+            if (updateResult != null) {
+                System.out.println("덱 수정 완료");
+            } else {
+                System.out.println("덱 수정 실패");
+            }
+        } else {
+            System.out.println("덱 작성자가 아닙니다.");
+        }
+    }
+
+    public void deleteDeck() {
+        System.out.println("수정할 덱의 id를 입력해주세요");
+        Long id = scanner.nextLong();
+        DeckDTO deckDTO = deckRepository.checkEmail(CommonVariables.loginEmail, id);
+        if (deckDTO != null){
+            boolean result = deckRepository.deleteDeck(id);
+            if (result){
+                System.out.println("사마준이 당신의 덱을 바다 속으로 던져버렸습니다.");
+            }else {
+                System.out.println("조이가 당신의 덱을 잘 지켜내었습니다.");
+            }
+        }else {
+            System.out.println("덱 작성자가 아닙니다.");
+        }
+    }
+
+    private void listPrint(List<CardDTO> cardDTOList) {
+        System.out.println("cardName\t" + "category\t" + "level\t" + "power\t" + "cardEffect\t" + "serialNum\t");
+        for (CardDTO cardDTO : cardDTOList) {
+            System.out.println(cardDTO.getCardName() + "\t" + cardDTO.getCategory() + "\t" + cardDTO.getLevel() + "\t"
+                    + cardDTO.getPower() + "\t" + cardDTO.getCardEffects() + "\t" + cardDTO.getSerialNum() + "\t");
+        }
+    }
+
+    private void listPrint2(List<CardDTO> cardDTOList) {
+        System.out.println("cardName\t" + "category\t" + "level\t" + "power\t" + "count\t" + "cardEffect\t" + "serialNum\t");
+        for (CardDTO cardDTO : cardDTOList) {
+            System.out.println(cardDTO.getCardName() + "\t" + cardDTO.getCategory() + "\t" + cardDTO.getLevel() + "\t"
+                    + cardDTO.getPower() + "\t" + cardDTO.getCount() + "\t" + cardDTO.getCardEffects() + "\t" + cardDTO.getSerialNum());
+        }
+    }
+
+    private void listPrint3(List<DeckDTO> deckDTOList) {
+        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "조회수\t");
+        for (DeckDTO deckDTO : deckDTOList) {
+            System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\t" + deckDTO.getHits());
+        }
+    }
+
+    private void listPrint4(DeckDTO deckDTO) {
+        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "덱구성\t" + "조회수\t");
+        System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\n" + deckDTO.getCardContents() + "\n" + deckDTO.getHits());
     }
 }

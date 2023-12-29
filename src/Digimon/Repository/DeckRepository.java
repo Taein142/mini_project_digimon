@@ -2,6 +2,7 @@ package Digimon.Repository;
 
 import Digimon.DTO.CardDTO;
 import Digimon.DTO.DeckDTO;
+import Digimon.common.CommonVariables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,6 @@ public class DeckRepository {
         return result;
     }
 
-//    public boolean saveDeck(List<CardDTO> cardContents) {
-//        List<DeckDTO> deckList = new ArrayList<>();
-//        deckList.add(new DeckDTO(cardContents));
-//        return deckDTOList.add((DeckDTO) cardContents);
-//    }
-
     public List<DeckDTO> showDeck() {
         return deckDTOList;
     }
@@ -47,11 +42,52 @@ public class DeckRepository {
 
     public List<DeckDTO> searchDeck(String searchTitle) {
         List<DeckDTO> searchTitleList = new ArrayList<>();
-        for (DeckDTO deckDTO: deckDTOList){
-            if (deckDTO.getDeckTitle().contains(searchTitle)){
+        for (DeckDTO deckDTO : deckDTOList) {
+            if (deckDTO.getDeckTitle().contains(searchTitle)) {
                 searchTitleList.add(deckDTO);
             }
         }
         return searchTitleList;
+    }
+
+    public DeckDTO updateDeckTitle(Long id, String deckTitle) {
+        for (DeckDTO deckDTO : deckDTOList) {
+            if (id.equals(deckDTO.getId())) {
+                deckDTO.setDeckTitle(deckTitle);
+                return deckDTO;
+            }
+        }
+        return null;
+    }
+
+    public DeckDTO updateDeckAll(Long id, String deckTitle, List<CardDTO> cardContents) {
+        for (DeckDTO deckDTO : deckDTOList) {
+            if (id.equals(deckDTO.getId())) {
+                deckDTO.setDeckTitle(deckTitle);
+                deckDTO.setCardContents(cardContents);
+                return deckDTO;
+            }
+        }
+        return null;
+    }
+
+    public DeckDTO checkEmail(String loginEmail, Long id) {
+        for (DeckDTO deckDTO : deckDTOList) {
+            if (id.equals(deckDTO.getId()) && loginEmail.equals(deckDTO.getCreatedEmail())) {
+                return deckDTO;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteDeck(Long id) {
+        boolean result = false;
+        for (int i = 0; i < deckDTOList.size(); i++) {
+            if (id.equals(deckDTOList.get(i).getId())) {
+                deckDTOList.remove(i);
+                return result;
+            }
+        }
+        return result;
     }
 }

@@ -75,9 +75,9 @@ public class MainController {
                     } else if (selectNum3 == 6) {
                         cardService.searchDeck();
                     } else if (selectNum3 == 7) {
-//                        cardService.updateDeck();
+                        cardService.updateDeck();
                     } else if (selectNum3 == 8) {
-//                        cardService.deleteDeck();
+                        cardService.deleteDeck();
                     } else if (selectNum3 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
                         run3 = false;
