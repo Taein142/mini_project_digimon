@@ -123,7 +123,7 @@ public class CardService {
                 System.out.println("수정할 카드의 아이디를 입력해주세요");
                 System.out.print("아이디: ");
                 Long id = scanner.nextLong();
-                CardDTO checkCard = cardRepository.check(id);
+                CardDTO checkCard = cardRepository.checkID(id);
                 if (checkCard != null) {
                     System.out.println("수정할 정보를 입력해주세요.");
                     System.out.print("이름: ");
@@ -167,7 +167,7 @@ public class CardService {
                 System.out.println("삭제하실 카드의 아이디를 입력해주세요");
                 System.out.print("id: ");
                 Long id = scanner.nextLong();
-                CardDTO checkCard = cardRepository.check(id);
+                CardDTO checkCard = cardRepository.checkID(id);
                 if (checkCard != null) {
                     System.out.println("정말 삭제하시겠습니까?");
                     System.out.println("삭제하시려면 1번, 아니라면 2번을 눌러주세요");

@@ -45,7 +45,7 @@ public class CardRepository {
         return null;
     }
 
-    public CardDTO check(Long id) {
+    public CardDTO checkID(Long id) {
         // 카드 아이디를 체크
         for (CardDTO cardDTO : cardDTOList) {
             if (id.equals(cardDTO.getId())) {
@@ -55,7 +55,7 @@ public class CardRepository {
         return null;
     }
 
-    public CardDTO updateCard(Long id, String cardName, String category, int level, int power, String MainEffect,String SideEffect, String booster, String serialNum) {
+    public CardDTO updateCard(Long id, String cardName, String category, int level, int power, String MainEffect, String SideEffect, String booster, String serialNum) {
         for (int i = 0; i < cardDTOList.size(); i++) {
             if (id.equals(cardDTOList.get(i).getId())) {
                 cardDTOList.get(i).setCardName(cardName);
@@ -89,10 +89,10 @@ public class CardRepository {
         for (CardDTO cardDTO : cardDTOList) {
             if (serialNumber.equals(cardDTO.getSerialNum())) {
                 int count = cardDTO.getCount();
-                if (count<4){
+                if (count < 4) {
                     count += 1;
                     cardDTO.setCount(count);
-                }else {
+                } else {
                     System.out.println("4장까지 넣을 수 있습니다.");
                 }
                 result = true;
@@ -105,7 +105,7 @@ public class CardRepository {
         // 덱에 입력한 시리얼넘버의 카드가 들어있는지 확인하는 메서드
         boolean result = false;
         for (int i = 0; i < deckContents.size(); i++) {
-            if (serialNum.equals(deckContents.get(i).getSerialNum())){
+            if (serialNum.equals(deckContents.get(i).getSerialNum())) {
                 result = true;
             }
         }
