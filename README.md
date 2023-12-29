@@ -27,7 +27,7 @@
     - DeckDTO
     - AdminDTO
 - common
-    - CommonValues
+    - CommonVariables
 
 ## 주요 기능 
 - 첫 메뉴 화면을 멤버, 카드, 관리자로 구분
