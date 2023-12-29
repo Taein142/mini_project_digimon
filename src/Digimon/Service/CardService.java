@@ -3,12 +3,10 @@ package Digimon.Service;
 import Digimon.DTO.AdminDTO;
 import Digimon.DTO.CardDTO;
 import Digimon.DTO.DeckDTO;
-import Digimon.DTO.MemberDTO;
 import Digimon.Repository.AdminRepository;
 import Digimon.Repository.CardRepository;
 import Digimon.Repository.DeckRepository;
 import Digimon.common.CommonVariables;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,7 @@ public class CardService {
     public void saveCard() {
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
         for (int i = 0; i < adminDTOList.size(); i++) {
+            // 관리자만 카드 등록 할 수 있도록 함.
             if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
                 System.out.println("카드의 정보를 입력해주세요");
                 System.out.print("이름: ");
@@ -33,14 +32,17 @@ public class CardService {
                 int cardLevel = scanner.nextInt();
                 System.out.print("파워: ");
                 int cardPower = scanner.nextInt();
-                System.out.print("효과: ");
+                System.out.print("메인 효과: ");
                 String blank = scanner.nextLine();
-                String cardEffect = scanner.nextLine();
+                String cardMainEffect = scanner.nextLine();
+                System.out.print("진화원 효과: ");
+                blank = scanner.nextLine();
+                String cardSideEffect = scanner.nextLine();
                 System.out.print("발매정보: ");
                 String cardBooster = scanner.next();
                 System.out.print("시리얼넘버: ");
                 String cardSerialNum = scanner.next();
-                CardDTO cardDTO = new CardDTO(cardName, cardCategory, cardLevel, cardPower, cardEffect, cardBooster, cardSerialNum);
+                CardDTO cardDTO = new CardDTO(cardName, cardCategory, cardLevel, cardPower, cardMainEffect, cardSideEffect, cardBooster, cardSerialNum);
                 boolean result = cardRepository.saveCard(cardDTO);
                 if (result) {
                     System.out.println("카드가 등록되었습니다.");
@@ -56,7 +58,7 @@ public class CardService {
 
     public void findAll() {
         List<CardDTO> cardDTOList = cardRepository.findAll();
-        listPrint(cardDTOList);
+        listPrint1(cardDTOList);
     }
 
     public void search() {
@@ -88,7 +90,7 @@ public class CardService {
         String word = scanner.next();
         List<CardDTO> cardNameList = cardRepository.searchName(word);
         if (cardNameList.size() > 0) {
-            listPrint(cardNameList);
+            listPrint1(cardNameList);
         } else {
             System.out.println("검색 결과가 없습니다.");
         }
@@ -100,7 +102,7 @@ public class CardService {
         String word = scanner.next();
         List<CardDTO> boosterList = cardRepository.searchBooster(word);
         if (boosterList.size() > 0) {
-            listPrint(boosterList);
+            listPrint1(boosterList);
         } else {
             System.out.println("검색 결과가 없습니다.");
         }
@@ -221,10 +223,10 @@ public class CardService {
                     }
                 }
             } while (!serialNum.equals("00"));
+            // 00을 입력할 때 까지 덱 리스트에 카드 추가
             listPrint2(cardContents);
             DeckDTO deckDTO = new DeckDTO(deckName, cardContents, CommonVariables.loginEmail);
             boolean deckResult = deckRepository.saveDeck(deckDTO);
-
             if (deckResult) {
                 System.out.println("덱이 생성되었습니다.");
             } else {
@@ -273,6 +275,7 @@ public class CardService {
     public void updateDeck() {
         System.out.println("수정하실 덱의 ID를 입력해주세요");
         Long id = scanner.nextLong();
+        // 현재 로그인 한 사람과 덱 만든 사람이 같은지 확인하는 메서드
         DeckDTO deckDTO = deckRepository.checkEmail(CommonVariables.loginEmail, id);
         if (deckDTO != null) {
             // 로그인유저의 이메일과 이 덱을 만든 이메일이 같다면
@@ -281,11 +284,12 @@ public class CardService {
             String deckTitle = scanner.next();
             System.out.println("덱 구성도 다시 만드시겠습니까?");
             System.out.println("1.네 | 2.아니오");
-            List<CardDTO> cardContents = new ArrayList<>();
             DeckDTO updateResult = null;
             int selectNum = scanner.nextInt();
             if (selectNum == 1) {
+                List<CardDTO> cardContents = new ArrayList<>();
                 String serialNum;
+                // do while문 자체는 세이브 메서드와 똑같음.
                 do {
                     System.out.print("시리얼 넘버: ");
                     serialNum = scanner.next();
@@ -342,19 +346,19 @@ public class CardService {
         }
     }
 
-    private void listPrint(List<CardDTO> cardDTOList) {
-        System.out.println("cardName\t" + "category\t" + "level\t" + "power\t" + "cardEffect\t" + "serialNum\t");
+    private void listPrint1(List<CardDTO> cardDTOList) {
+        System.out.println("카드이름\t" + "카테고리\t" + "레벨\t" + "파워\t" + "메인 효과\t" + "진화원 효과\t" + "시리얼넘버\t");
         for (CardDTO cardDTO : cardDTOList) {
             System.out.println(cardDTO.getCardName() + "\t" + cardDTO.getCategory() + "\t" + cardDTO.getLevel() + "\t"
-                    + cardDTO.getPower() + "\t" + cardDTO.getCardEffects() + "\t" + cardDTO.getSerialNum() + "\t");
+                    + cardDTO.getPower() + "\t" + cardDTO.getCardMainEffects() + "\t" + cardDTO.getCardSideEffects() + "\t" + cardDTO.getSerialNum() + "\t");
         }
     }
 
     private void listPrint2(List<CardDTO> cardDTOList) {
-        System.out.println("cardName\t" + "category\t" + "level\t" + "power\t" + "count\t" + "cardEffect\t" + "serialNum\t");
+        System.out.println("카드이름\t" + "카테고리\t" + "레벨\t" + "파워\t" + "카드매수\t" + "메인 효과\t" + "진화원 효과\t" + "시리얼넘버\t");
         for (CardDTO cardDTO : cardDTOList) {
             System.out.println(cardDTO.getCardName() + "\t" + cardDTO.getCategory() + "\t" + cardDTO.getLevel() + "\t"
-                    + cardDTO.getPower() + "\t" + cardDTO.getCount() + "\t" + cardDTO.getCardEffects() + "\t" + cardDTO.getSerialNum());
+                    + cardDTO.getPower() + "\t" + cardDTO.getCount() + "\t" + cardDTO.getCardMainEffects() + "\t" + cardDTO.getCardSideEffects() + "\t" + cardDTO.getSerialNum());
         }
     }
 

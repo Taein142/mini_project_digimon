@@ -41,6 +41,7 @@ public class MemberService {
             if (result) {
                 System.out.println("가입 완료되었습니다.");
                 if (dto.getId() == 0L) {
+                    // 처음 회원가입 한 사람을 관리자로 임명하여 작업 수행할 수 있도록 함.
                     AdminDTO adminDTO = new AdminDTO(dto.getId(), memberEmail);
                     boolean adminResult = adminRepository.saveAdmin(adminDTO);
                     if (adminResult) {
@@ -130,6 +131,7 @@ public class MemberService {
     }
 
     public void saveAdmin() {
+        // 관리자 추가 임명 메소드
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
         for (int i = 0; i < adminDTOList.size(); i++) {
             if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {

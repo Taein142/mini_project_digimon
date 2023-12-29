@@ -9,7 +9,8 @@ public class CardDTO {
     private String category;
     private int level;
     private int power;
-    private String cardEffects;
+    private String cardMainEffects;
+    private String cardSideEffects;
     private String boosterNum;
     private String serialNum;
     private String createdAt;
@@ -54,12 +55,20 @@ public class CardDTO {
         this.power = power;
     }
 
-    public String getCardEffects() {
-        return cardEffects;
+    public String getCardMainEffects() {
+        return cardMainEffects;
     }
 
-    public void setCardEffects(String cardEffects) {
-        this.cardEffects = cardEffects;
+    public void setCardMainEffects(String cardMainEffects) {
+        this.cardMainEffects = cardMainEffects;
+    }
+
+    public String getCardSideEffects() {
+        return cardSideEffects;
+    }
+
+    public void setCardSideEffects(String cardSideEffects) {
+        this.cardSideEffects = cardSideEffects;
     }
 
     public String getBoosterNum() {
@@ -86,6 +95,14 @@ public class CardDTO {
         this.createdAt = createdAt;
     }
 
+    public static Long getInValue() {
+        return inValue;
+    }
+
+    public static void setInValue(Long inValue) {
+        CardDTO.inValue = inValue;
+    }
+
     public int getCount() {
         return count;
     }
@@ -100,13 +117,14 @@ public class CardDTO {
     private static Long inValue = 1L;
     private int count;
 
-    public CardDTO(String cardName, String category, int level, int power, String cardEffects, String boosterNum, String serialNum) {
+    public CardDTO(String cardName, String category, int level, int power, String cardMainEffects, String cardSideEffects, String boosterNum, String serialNum) {
         this.id = inValue++;
         this.cardName = cardName;
         this.category = category;
         this.level = level;
         this.power = power;
-        this.cardEffects = cardEffects;
+        this.cardMainEffects = cardMainEffects;
+        this.cardSideEffects = cardSideEffects;
         this.boosterNum = boosterNum;
         this.serialNum = serialNum;
         this.count = 1;
@@ -121,11 +139,12 @@ public class CardDTO {
                 ", category='" + category + '\'' +
                 ", level=" + level +
                 ", power=" + power +
-                ", cardEffects='" + cardEffects + '\'' +
+                ", cardMainEffects='" + cardMainEffects + '\'' +
+                ", cardSideEffects='" + cardSideEffects + '\'' +
                 ", boosterNum='" + boosterNum + '\'' +
                 ", serialNum='" + serialNum + '\'' +
-                ", count=" + count +
                 ", createdAt='" + createdAt + '\'' +
+                ", count=" + count +
                 '}';
     }
 }
