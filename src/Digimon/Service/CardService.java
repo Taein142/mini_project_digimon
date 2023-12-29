@@ -134,14 +134,17 @@ public class CardService {
                     int level = scanner.nextInt();
                     System.out.print("파워: ");
                     int power = scanner.nextInt();
-                    System.out.print("효과: ");
+                    System.out.print("메인 효과: ");
                     String blank = scanner.nextLine();
-                    String effect = scanner.nextLine();
+                    String cardMainEffect = scanner.nextLine();
+                    System.out.print("진화원 효과: ");
+                    blank = scanner.nextLine();
+                    String cardSideEffect = scanner.nextLine();
                     System.out.print("부스터: ");
                     String booster = scanner.next();
                     System.out.print("시리얼넘버: ");
                     String serialNum = scanner.next();
-                    CardDTO cardDTO = cardRepository.updateCard(id, cardName, category, level, power, effect, booster, serialNum);
+                    CardDTO cardDTO = cardRepository.updateCard(id, cardName, category, level, power, cardMainEffect, cardSideEffect, booster, serialNum);
                     if (cardDTO != null) {
                         System.out.println("수정되었습니다.");
                     } else {
