@@ -373,7 +373,7 @@ public class CardService {
     }
 
     private void listPrint4(DeckDTO deckDTO) {
-        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "덱구성\t" + "조회수\t" + "생성시간\t");
-        System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\n" + deckDTO.getCardContents() + "\n" + deckDTO.getHits() + "\t" + deckDTO.getCreatedAt());
+        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "조회수\t" + "생성시간\n" + "덱구성");
+        System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\t" + deckDTO.getHits() + "\t" + deckDTO.getCreatedAt() +"\n"+ deckDTO.getCardContents());
     }
 }
