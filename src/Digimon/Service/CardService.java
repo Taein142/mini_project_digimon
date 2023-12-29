@@ -273,7 +273,7 @@ public class CardService {
     public void updateDeck() {
         System.out.println("수정하실 덱의 ID를 입력해주세요");
         Long id = scanner.nextLong();
-        DeckDTO deckDTO = deckRepository.checkEmail(CommonVariables.loginEmail,id);
+        DeckDTO deckDTO = deckRepository.checkEmail(CommonVariables.loginEmail, id);
         if (deckDTO != null) {
             // 로그인유저의 이메일과 이 덱을 만든 이메일이 같다면
             System.out.println("수정할 정보를 입력해주세요");
@@ -330,14 +330,14 @@ public class CardService {
         System.out.println("수정할 덱의 id를 입력해주세요");
         Long id = scanner.nextLong();
         DeckDTO deckDTO = deckRepository.checkEmail(CommonVariables.loginEmail, id);
-        if (deckDTO != null){
+        if (deckDTO != null) {
             boolean result = deckRepository.deleteDeck(id);
-            if (result){
+            if (result) {
                 System.out.println("사마준이 당신의 덱을 바다 속으로 던져버렸습니다.");
-            }else {
+            } else {
                 System.out.println("조이가 당신의 덱을 잘 지켜내었습니다.");
             }
-        }else {
+        } else {
             System.out.println("덱 작성자가 아닙니다.");
         }
     }
@@ -359,14 +359,14 @@ public class CardService {
     }
 
     private void listPrint3(List<DeckDTO> deckDTOList) {
-        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "조회수\t");
+        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "조회수\t" + "생성시간\t");
         for (DeckDTO deckDTO : deckDTOList) {
-            System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\t" + deckDTO.getHits());
+            System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\t" + deckDTO.getHits() + "\t" + deckDTO.getCreatedAt());
         }
     }
 
     private void listPrint4(DeckDTO deckDTO) {
-        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "덱구성\t" + "조회수\t");
-        System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\n" + deckDTO.getCardContents() + "\n" + deckDTO.getHits());
+        System.out.println("id\t" + "작성자\t" + "덱이름\t" + "덱구성\t" + "조회수\t" + "생성시간\t");
+        System.out.println(deckDTO.getId() + "\t" + deckDTO.getCreatedEmail() + "\t" + deckDTO.getDeckTitle() + "\n" + deckDTO.getCardContents() + "\n" + deckDTO.getHits() + "\t" + deckDTO.getCreatedAt());
     }
 }
