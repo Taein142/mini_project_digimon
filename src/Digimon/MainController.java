@@ -21,9 +21,9 @@ public class MainController {
         int selectNum4 = 0;
         while (run1) {
             System.out.println("메인메뉴");
-            System.out.println("----------------------------------------------");
+            System.out.println("------------------------------------");
             System.out.println("1.멤버 | 2.카드 | 3.관리자 | 0.종료");
-            System.out.println("----------------------------------------------");
+            System.out.println("------------------------------------");
             selectNum1 = scanner.nextInt();
             if (selectNum1 == 1) {
                 //멤버
@@ -35,16 +35,22 @@ public class MainController {
                     System.out.println("----------------------------------------------------------------------------------");
                     selectNum2 = scanner.nextInt();
                     if (selectNum2 == 1) {
+                        System.out.println("회원가입");
                         memberService.saveMember();
                     } else if (selectNum2 == 2) {
+                        System.out.println("로그인");
                         memberService.login();
                     } else if (selectNum2 == 3) {
+                        System.out.println("회원목록");
                         memberService.findAll();
                     } else if (selectNum2 == 4) {
+                        System.out.println("회원수정");
                         memberService.updateMember();
                     } else if (selectNum2 == 5) {
+                        System.out.println("회원탈퇴");
                         memberService.deleteMember();
                     } else if (selectNum2 == 6) {
+                        System.out.println("로그아웃");
                         memberService.logout();
                     } else if (selectNum2 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
@@ -63,20 +69,28 @@ public class MainController {
                     System.out.println("------------------------------------------------------------------------------------------------");
                     selectNum3 = scanner.nextInt();
                     if (selectNum3 == 1) {
+                        System.out.println("카드목록");
                         cardService.findAll();
                     } else if (selectNum3 == 2) {
+                        System.out.println("카드검색");
                         cardService.search();
                     } else if (selectNum3 == 3) {
+                        System.out.println("덱 생성");
                         cardService.saveDeck();
                     } else if (selectNum3 == 4) {
+                        System.out.println("덱 목록");
                         cardService.showDeck();
                     } else if (selectNum3 == 5) {
+                        System.out.println("덱 조회");
                         cardService.findDeckId();
                     } else if (selectNum3 == 6) {
+                        System.out.println("덱 검색");
                         cardService.searchDeck();
                     } else if (selectNum3 == 7) {
+                        System.out.println("덱 수정");
                         cardService.updateDeck();
                     } else if (selectNum3 == 8) {
+                        System.out.println("덱 삭제");
                         cardService.deleteDeck();
                     } else if (selectNum3 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");
