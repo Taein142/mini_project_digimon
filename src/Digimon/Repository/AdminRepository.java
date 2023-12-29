@@ -1,7 +1,6 @@
 package Digimon.Repository;
 
 import Digimon.DTO.AdminDTO;
-import Digimon.DTO.MemberDTO;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,6 @@ package Digimon;
 
 import Digimon.Service.CardService;
 import Digimon.Service.MemberService;
-import Digimon.common.CommonVariables;
 
 import java.util.Scanner;
 

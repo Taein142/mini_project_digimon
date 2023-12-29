@@ -2,7 +2,6 @@ package Digimon.Repository;
 
 import Digimon.DTO.CardDTO;
 import Digimon.DTO.DeckDTO;
-import Digimon.common.CommonVariables;
 
 import java.util.ArrayList;
 import java.util.List;
