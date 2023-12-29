@@ -85,7 +85,7 @@ public class DeckRepository {
         for (int i = 0; i < deckDTOList.size(); i++) {
             if (id.equals(deckDTOList.get(i).getId())) {
                 deckDTOList.remove(i);
-                return result;
+                result = true;
             }
         }
         return result;
