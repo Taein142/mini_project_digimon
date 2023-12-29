@@ -205,10 +205,10 @@ public class CardService {
                 System.out.print("시리얼 넘버: ");
                 serialNum = scanner.next();
                 if (!serialNum.equals("00")) {
-                    boolean checkCount = cardRepository.cardCount(cardContents, serialNum);
+                    boolean checkCard = cardRepository.checkCard(cardContents, serialNum);
                     CardDTO card = cardRepository.findBySerialNum(serialNum);
                     if (card != null) {
-                        if (checkCount) {
+                        if (checkCard) {
                             // 덱에 동일한 시리얼넘버를 가진 카드가 있다면 카운트를 늘린다
                             boolean countResult = cardRepository.updateCount(serialNum);
                             if (countResult) {
@@ -297,10 +297,10 @@ public class CardService {
                     System.out.print("시리얼 넘버: ");
                     serialNum = scanner.next();
                     if (!serialNum.equals("00")) {
-                        boolean checkCount = cardRepository.cardCount(cardContents, serialNum);
+                        boolean checkCard = cardRepository.checkCard(cardContents, serialNum);
                         CardDTO card = cardRepository.findBySerialNum(serialNum);
                         if (card != null) {
-                            if (checkCount) {
+                            if (checkCard) {
                                 // 덱에 동일한 시리얼넘버를 가진 카드가 있다면 카운트를 늘린다
                                 boolean countResult = cardRepository.updateCount(serialNum);
                                 if (countResult) {

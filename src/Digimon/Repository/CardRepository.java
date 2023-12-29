@@ -46,6 +46,7 @@ public class CardRepository {
     }
 
     public CardDTO check(Long id) {
+        // 카드 아이디를 체크
         for (CardDTO cardDTO : cardDTOList) {
             if (id.equals(cardDTO.getId())) {
                 return cardDTO;
@@ -83,6 +84,7 @@ public class CardRepository {
     }
 
     public boolean updateCount(String serialNumber) {
+        // 카드 매수를 증가시키는 메서드
         boolean result = false;
         for (CardDTO cardDTO : cardDTOList) {
             if (serialNumber.equals(cardDTO.getSerialNum())) {
@@ -99,7 +101,8 @@ public class CardRepository {
         return result;
     }
 
-    public boolean cardCount(List<CardDTO> deckContents, String serialNum) {
+    public boolean checkCard(List<CardDTO> deckContents, String serialNum) {
+        // 덱에 입력한 시리얼넘버의 카드가 들어있는지 확인하는 메서드
         boolean result = false;
         for (int i = 0; i < deckContents.size(); i++) {
             if (serialNum.equals(deckContents.get(i).getSerialNum())){
