@@ -58,9 +58,9 @@ public class MainController {
                 run3 = true;
                 while (run3) {
                     System.out.println("카드메뉴");
-                    System.out.println("--------------------------------------------------------------------------------------");
-                    System.out.println("1.카드목록 | 2.카드검색 | 3.덱구축 | 4.덱목록 | 5.덱조회 | 6.덱수정 | 7.덱삭제 | 0.메인메뉴");
-                    System.out.println("--------------------------------------------------------------------------------------");
+                    System.out.println("------------------------------------------------------------------------------------------------");
+                    System.out.println("1.카드목록 | 2.카드검색 | 3.덱구축 | 4.덱목록 | 5.덱조회 | 6.덱검색 | 7.덱수정 | 8.덱삭제 | 0.메인메뉴");
+                    System.out.println("------------------------------------------------------------------------------------------------");
                     selectNum3 = scanner.nextInt();
                     if (selectNum3 == 1) {
                         cardService.findAll();
@@ -69,12 +69,14 @@ public class MainController {
                     } else if (selectNum3 == 3) {
                         cardService.saveDeck();
                     } else if (selectNum3 == 4) {
-//                        cardService.showDeck();
+                        cardService.showDeck();
                     } else if (selectNum3 == 5) {
-//                        cardService.findDeck();
+                        cardService.findDeckId();
                     } else if (selectNum3 == 6) {
-//                        cardService.updateDeck();
+                        cardService.searchDeck();
                     } else if (selectNum3 == 7) {
+//                        cardService.updateDeck();
+                    } else if (selectNum3 == 8) {
 //                        cardService.deleteDeck();
                     } else if (selectNum3 == 0) {
                         System.out.println("메인메뉴로 돌아갑니다.");

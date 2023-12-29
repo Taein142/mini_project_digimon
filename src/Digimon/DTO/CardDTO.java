@@ -109,7 +109,7 @@ public class CardDTO {
         this.cardEffects = cardEffects;
         this.boosterNum = boosterNum;
         this.serialNum = serialNum;
-        this.count = 0;
+        this.count = 1;
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm:ss"));
     }
 
@@ -124,8 +124,8 @@ public class CardDTO {
                 ", cardEffects='" + cardEffects + '\'' +
                 ", boosterNum='" + boosterNum + '\'' +
                 ", serialNum='" + serialNum + '\'' +
-                ", createdAt='" + createdAt + '\'' +
                 ", count=" + count +
+                ", createdAt='" + createdAt + '\'' +
                 '}';
     }
 }

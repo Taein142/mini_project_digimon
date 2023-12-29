@@ -7,10 +7,10 @@ import java.util.List;
 public class DeckDTO {
     private Long id;
     private String deckTitle;
-    private List<CardDTO> deckContents;
+    private List<CardDTO> cardContents;
     private long hits;
-//    private int count;
     private String createdAt;
+
 
     public Long getId() {
         return id;
@@ -28,12 +28,12 @@ public class DeckDTO {
         this.deckTitle = deckTitle;
     }
 
-    public List<CardDTO> getDeckContents() {
-        return deckContents;
+    public List<CardDTO> getCardContents() {
+        return cardContents;
     }
 
-    public void setDeckContents(List<CardDTO> deckContents) {
-        this.deckContents = deckContents;
+    public void setCardContents(List<CardDTO> CardContents) {
+        this.cardContents = CardContents;
     }
 
     public long getHits() {
@@ -44,13 +44,6 @@ public class DeckDTO {
         this.hits = hits;
     }
 
-//    public int getCount() {
-//        return count;
-//    }
-//
-//    public void setCount(int count) {
-//        this.count = count;
-//    }
 
     public String getCreatedAt() {
         return createdAt;
@@ -62,14 +55,15 @@ public class DeckDTO {
 
     public DeckDTO() {
     }
+    public DeckDTO(List<CardDTO> cardContents) {
+    }
     private static Long inValue = 1L;
-    public DeckDTO(String deckTitle, List<CardDTO> deckContents) {
+    public DeckDTO(String deckTitle, List<CardDTO> cardContents) {
         this.id = inValue++;
         this.deckTitle = deckTitle;
-        this.deckContents = deckContents;
+        this.cardContents = cardContents;
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm:ss"));
         this.hits = 0;
-//        this.count = 1;
     }
 
     @Override
@@ -77,7 +71,7 @@ public class DeckDTO {
         return "DeckDTO{" +
                 "id=" + id +
                 ", deckTitle='" + deckTitle + '\'' +
-                ", deckContents='" + deckContents + '\'' +
+                ", deckContents='" + cardContents + '\'' +
                 ", hits=" + hits +
 //                ", count=" + count +
                 ", createdAt='" + createdAt + '\'' +

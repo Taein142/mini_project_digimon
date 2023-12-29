@@ -93,4 +93,14 @@ public class CardRepository {
         }
         return result;
     }
+
+    public boolean cardCount(List<CardDTO> deckContents, String serialNum) {
+        boolean result = false;
+        for (int i = 0; i < deckContents.size(); i++) {
+            if (serialNum.equals(deckContents.get(i).getSerialNum())){
+                result = true;
+            }
+        }
+        return result;
+    }
 }
