@@ -55,15 +55,15 @@ public class CardRepository {
         return null;
     }
 
-    public CardDTO updateCard(Long id, String cardName, String category, int level, int power, String MainEffect, String SideEffect, String booster, String serialNum) {
+    public CardDTO updateCard(Long id, String cardName, String category, int level, int power, String mainEffect, String sideEffect, String booster, String serialNum) {
         for (int i = 0; i < cardDTOList.size(); i++) {
             if (id.equals(cardDTOList.get(i).getId())) {
                 cardDTOList.get(i).setCardName(cardName);
                 cardDTOList.get(i).setCategory(category);
                 cardDTOList.get(i).setLevel(level);
                 cardDTOList.get(i).setPower(power);
-                cardDTOList.get(i).setCardMainEffects(MainEffect);
-                cardDTOList.get(i).setCardSideEffects(SideEffect);
+                cardDTOList.get(i).setCardMainEffects(mainEffect);
+                cardDTOList.get(i).setCardSideEffects(sideEffect);
                 cardDTOList.get(i).setBoosterNum(booster);
                 cardDTOList.get(i).setSerialNum(serialNum);
                 return cardDTOList.get(i);
