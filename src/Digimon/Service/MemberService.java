@@ -163,18 +163,22 @@ public class MemberService {
     public void deleteAdmin() {
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
         for (int i = 0; i < adminDTOList.size(); i++) {
-            if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
-                System.out.println("삭제할 관리자 id: ");
-                Long id = scanner.nextLong();
-                boolean result = adminRepository.deleteAdmin(id);
-                if (result) {
-                    System.out.println("해당 관리자가 퇴출되었습니다.");
+            if (adminDTOList.get(i).getId()!=0){
+                if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
+                    System.out.println("삭제할 관리자 id: ");
+                    Long id = scanner.nextLong();
+                    boolean result = adminRepository.deleteAdmin(id);
+                    if (result) {
+                        System.out.println("해당 관리자가 퇴출되었습니다.");
+                    } else {
+                        System.out.println("관리자 삭제에 실패하였습니다.");
+                    }
+                    break;
                 } else {
-                    System.out.println("관리자 삭제에 실패하였습니다.");
+                    System.out.println("관리자만 이용할 수 있는 서비스입니다.");
                 }
-                break;
-            } else {
-                System.out.println("관리자만 이용할 수 있는 서비스입니다.");
+            }else {
+                System.out.println("최고위 관리자는 퇴출할 수 없습니다.");
             }
         }
     }
