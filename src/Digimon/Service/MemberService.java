@@ -132,8 +132,8 @@ public class MemberService {
     public void saveAdmin() {
         // 관리자 추가 임명 메소드
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
-        for (AdminDTO dto : adminDTOList) {
-            if (dto.getAdminEmail().equals(CommonVariables.loginEmail)) {
+        for (int i = 0; i < adminDTOList.size(); i++) {
+            if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
                 System.out.println("등록할 사람의 아이디와 이메일을 입력해주세요");
                 System.out.print("아이디: ");
                 Long id = scanner.nextLong();
@@ -161,11 +161,11 @@ public class MemberService {
 
     public void deleteAdmin() {
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
-        for (AdminDTO adminDTO : adminDTOList) {
-            if (adminDTO.getId() != 0) {
-                if (adminDTO.getAdminEmail().equals(CommonVariables.loginEmail)) {
-                    System.out.println("삭제할 관리자 id: ");
-                    Long id = scanner.nextLong();
+        for (int i = 0; i < adminDTOList.size(); i++) {
+            if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
+                System.out.println("삭제할 관리자 id: ");
+                Long id = scanner.nextLong();
+                if (id != 0) {
                     boolean result = adminRepository.deleteAdmin(id);
                     if (result) {
                         System.out.println("해당 관리자가 퇴출되었습니다.");
@@ -174,13 +174,14 @@ public class MemberService {
                     }
                     break;
                 } else {
-                    System.out.println("관리자만 이용할 수 있는 서비스입니다.");
+                    System.out.println("최고위 관리자는 퇴출할 수 없습니다.");
                 }
             } else {
-                System.out.println("최고위 관리자는 퇴출할 수 없습니다.");
+                System.out.println("관리자만 이용할 수 있는 서비스입니다.");
             }
         }
     }
+
 
     public void findAdmin() {
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
