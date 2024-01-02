@@ -7,7 +7,6 @@ import Digimon.Repository.MemberRepository;
 import Digimon.common.CommonVariables;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -133,8 +132,8 @@ public class MemberService {
     public void saveAdmin() {
         // 관리자 추가 임명 메소드
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
-        for (int i = 0; i < adminDTOList.size(); i++) {
-            if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
+        for (AdminDTO dto : adminDTOList) {
+            if (dto.getAdminEmail().equals(CommonVariables.loginEmail)) {
                 System.out.println("등록할 사람의 아이디와 이메일을 입력해주세요");
                 System.out.print("아이디: ");
                 Long id = scanner.nextLong();
@@ -162,9 +161,9 @@ public class MemberService {
 
     public void deleteAdmin() {
         List<AdminDTO> adminDTOList = adminRepository.findAdmin();
-        for (int i = 0; i < adminDTOList.size(); i++) {
-            if (adminDTOList.get(i).getId()!=0){
-                if (adminDTOList.get(i).getAdminEmail().equals(CommonVariables.loginEmail)) {
+        for (AdminDTO adminDTO : adminDTOList) {
+            if (adminDTO.getId() != 0) {
+                if (adminDTO.getAdminEmail().equals(CommonVariables.loginEmail)) {
                     System.out.println("삭제할 관리자 id: ");
                     Long id = scanner.nextLong();
                     boolean result = adminRepository.deleteAdmin(id);
@@ -177,7 +176,7 @@ public class MemberService {
                 } else {
                     System.out.println("관리자만 이용할 수 있는 서비스입니다.");
                 }
-            }else {
+            } else {
                 System.out.println("최고위 관리자는 퇴출할 수 없습니다.");
             }
         }
